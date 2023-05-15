@@ -41,16 +41,16 @@ func ctxGoroutine(ctx context.Context) {
 func main() {
 	stopCh := make(chan struct{})
 	go chanGoroutine(stopCh)
-	time.Sleep(5 * time.Second)
-	close(stopCh)
 	time.Sleep(2 * time.Second)
+	close(stopCh)
+	time.Sleep(1 * time.Second)
 	fmt.Println("finish fisrt")
 
 	//2nd
 	ctx, cancel := context.WithCancel(context.Background())
 	go ctxGoroutine(ctx)
-	time.Sleep(5 * time.Second)
-	cancel()
 	time.Sleep(2 * time.Second)
+	cancel()
+	time.Sleep(1 * time.Second)
 	fmt.Println("finish second")
 }
